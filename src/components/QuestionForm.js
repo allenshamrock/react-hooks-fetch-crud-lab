@@ -19,6 +19,25 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const choices = {
+      prompt: formData.prompt,
+      answers: [
+        formData.answer1,
+        formData.answer2,
+        formData.answer3,
+        formData.answer4,
+      ],
+      correctIndex: formData.correctIndex,
+    };
+    fetch("http://localhost:4000/questions",{
+      method: 'POST',
+      headers:{
+        'content-Type':'application/json',
+      },
+      body:JSON.stringify(choices)
+    })
+    .then((response)=> response.json())
+    .then((data)=>console.log(data))
     console.log(formData);
   }
 
